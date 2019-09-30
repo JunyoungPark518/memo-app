@@ -1,17 +1,15 @@
 package com.example.jypnote.ui.main.model
 
-import lombok.AllArgsConstructor
-import lombok.Builder
-import lombok.Data
-import lombok.NoArgsConstructor
-
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 class Usage {
-    private val id: Int = 0
-    private val datetime: String? = null
-    private val comment: String? = null
-    private val amount: Int = 0
+    var id: Int = 0
+    var cardName: String? = null
+    var usageName: String? = null
+    var datetime: String? = null
+    var price: Int = 0
+    var discount: Int = 0
+    var payPrice: Int = 0
+    var summation: Int = 0
+
+    var pageSize: Int = 10
+    var startIndex: Int = 0
 }
