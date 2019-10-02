@@ -6,7 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient {
-    var retrofit: Retrofit? = null
 
     companion object Factory {
         fun getClient(): Retrofit {
@@ -17,7 +16,7 @@ class ApiClient {
                 .baseUrl("http://localhost:8100")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
-                .build() as Retrofit
+                .build()
 
         }
     }
