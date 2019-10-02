@@ -10,7 +10,8 @@ import com.example.jypnote.ui.main.view.PlaceholderFragment
 private val TAB_TITLES = arrayOf(
     R.string.tab1,
     R.string.tab2,
-    R.string.tab3
+    R.string.tab3,
+    R.string.tab4
 )
 
 /**
@@ -31,7 +32,6 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     }
 
     override fun getCount(): Int {
-        // Show 2 total pages.
-        return 3
+        return 4
     }
 }

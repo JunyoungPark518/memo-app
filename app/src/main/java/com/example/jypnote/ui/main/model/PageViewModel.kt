@@ -14,6 +14,7 @@ class PageViewModel : ViewModel() {
     }
 
     fun setIndex(index: Int) {
+        println("index >>> $index")
         _index.value = index
     }
 }

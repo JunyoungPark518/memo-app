@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">니용</string>
-    <string name="tab1">지출</string>
-    <string name="tab2">입금</string>
-    <string name="tab3">추정</string>
+    <string name="tab1">카드</string>
+    <string name="tab2">은행</string>
+    <string name="tab3">사용</string>
+    <string name="tab4">합계</string>
 </resources>
