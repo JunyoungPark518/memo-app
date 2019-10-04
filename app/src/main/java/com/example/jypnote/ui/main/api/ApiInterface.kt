@@ -1,23 +1,26 @@
 package com.example.jypnote.ui.main.api
 
-import com.example.jypnote.ui.main.dataclass.Bank
-import com.example.jypnote.ui.main.dataclass.Card
-import com.example.jypnote.ui.main.dataclass.Usage
+import com.example.jypnote.ui.main.dataclass.Meta
+import com.example.jypnote.ui.main.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiInterface {
 
+    @GET("meta")
+    fun meta(@Query("platform") platform: String, @Query("appVersion") appVersion: String): Call<Meta>
+
     @GET("bank/list")
-    fun selectBankList(): Call<Bank>
+    fun getBankList(@Query("userId") userId: Int): Call<BankMain>
 
     @POST("card/create")
     fun createCard(card: Card)
 
     @GET("card/list")
-    fun selectCardList(): Call<Card>
+    fun getCardList(@Query("userId") userId: Int): Call<Card>
 
     @GET("usage/list")
-    fun selectUsageList(startIndex: Int, pageSize: Int): Call<Usage>
+    fun getUsageList(@Query("userId") userId: Int, @Query("cardId") cardId: Int? = null, @Query("startIndex") startIndex: Int = 0, @Query("pageSize") pageSize: Int = 10): Call<Usage>
 }

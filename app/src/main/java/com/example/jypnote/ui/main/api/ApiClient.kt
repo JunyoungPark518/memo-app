@@ -8,12 +8,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiClient {
 
     companion object Factory {
+
+        var baseUrl : String = "http://localhost:8100"
+
         fun getClient(): Retrofit {
             val interceptor: HttpLoggingInterceptor? = HttpLoggingInterceptor()
             interceptor!!.setLevel(HttpLoggingInterceptor.Level.BODY)
             val client: OkHttpClient? = OkHttpClient.Builder().addInterceptor(interceptor).build()
             return Retrofit.Builder()
-                .baseUrl("http://localhost:8100")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
