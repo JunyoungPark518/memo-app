@@ -9,7 +9,7 @@ class ApiClient {
 
     companion object Factory {
 
-        var baseUrl : String = "http://localhost:8100"
+        var baseUrl : String = "http://192.168.43.76:8100"
 
         fun getClient(): Retrofit {
             val interceptor: HttpLoggingInterceptor? = HttpLoggingInterceptor()

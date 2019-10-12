@@ -19,7 +19,7 @@ interface ApiInterface {
     fun createCard(card: Card)
 
     @GET("card/list")
-    fun getCardList(@Query("userId") userId: Int): Call<Card>
+    fun getCardList(@Query("userId") userId: Int): Call<CardMain>
 
     @GET("usage/list")
     fun getUsageList(@Query("userId") userId: Int, @Query("cardId") cardId: Int? = null, @Query("startIndex") startIndex: Int = 0, @Query("pageSize") pageSize: Int = 10): Call<Usage>

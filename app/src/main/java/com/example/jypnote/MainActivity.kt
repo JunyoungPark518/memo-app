@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.jypnote.ui.main.adapter.SectionsPagerAdapter
 import com.example.jypnote.ui.main.api.ApiClient
 import com.example.jypnote.ui.main.api.ApiInterface
-import com.example.jypnote.ui.main.model.Bank
-import com.example.jypnote.ui.main.model.BankMain
-import com.example.jypnote.ui.main.model.Card
-import com.example.jypnote.ui.main.model.Usage
+import com.example.jypnote.ui.main.model.*
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -18,15 +15,13 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     internal var apiInterface: ApiInterface? = null
-    lateinit var bankList: List<Bank>
-    lateinit var cardList: List<Card>
-    lateinit var usageList: List<Usage>
+    var bankList: List<Bank>? = null
+    var cardList: List<Card>? = null
+    var usageList: List<Usage>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        initModel()
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         view_pager.adapter = sectionsPagerAdapter
@@ -37,12 +32,19 @@ class MainActivity : AppCompatActivity() {
                 view_pager.currentItem = tab.position
                 when(tab.position) {
                     0 -> {
-
+                        if(cardList!!.isEmpty())
+                            getCardList()
                         println("카드")
                     }
-                    1 -> println("dmsgod")
+                    1 -> {
+                        if(bankList!!.isEmpty())
+                            getBankList()
+                        println("은행")
+                    }
                     2 -> println("사용")
-                    3 -> println("합")
+                    3 -> {
+                        println("합")
+                    }
                     else -> println("NO!!")
 
                 }
@@ -84,23 +86,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    fun initModel() {
-        getBankList()
-    }
-
     fun getBankList() {
         apiInterface!!.getBankList(1).enqueue(object : retrofit2.Callback<BankMain> {
             override fun onResponse(call: Call<BankMain>, response: Response<BankMain>) {
                 val res: BankMain? = response.body()
-                if(res!!.result.equals("Y")) {
+                if(res!!.result.equals("Y"))
                     bankList = res.list!!
-                }
             }
-
             override fun onFailure(call: Call<BankMain>, t: Throwable) {
                 println(t.stackTrace)
-                textView1.setText("Fail!!!")
+                textView1.setText("Fail to getBankList")
+            }
+        })
+    }
+
+    fun getCardList() {
+        apiInterface!!.getCardList(1).enqueue(object : retrofit2.Callback<CardMain> {
+            override fun onResponse(call: Call<CardMain>, response: Response<CardMain>) {
+                val res: CardMain? = response.body()
+                if(res!!.result.equals("Y"))
+                    cardList = res.list!!
+            }
+            override fun onFailure(call: Call<CardMain>, t: Throwable) {
+                println(t.stackTrace)
+                textView1.setText("Fail to getCardList")
             }
         })
     }

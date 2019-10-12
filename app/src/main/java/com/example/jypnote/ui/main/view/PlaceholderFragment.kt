@@ -33,7 +33,8 @@ class PlaceholderFragment : Fragment() {
         val textView: TextView = root.findViewById(R.id.section_label)
 
         pageViewModel.text.observe(this, Observer<String> {
-            textView.text = it
+//            textView.text = it
+            textView.text = "12315151515123123"
         })
         return root
     }
